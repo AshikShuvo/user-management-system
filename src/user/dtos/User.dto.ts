@@ -1,5 +1,7 @@
 import {ApiProperty} from "@nestjs/swagger";
 import {IsEmail, IsNotEmpty} from "class-validator";
+import {Exclude, Expose} from "class-transformer";
+import { User } from "@prisma/client";
 
 export class CreateUserDto {
     @ApiProperty({
@@ -21,4 +23,21 @@ export class CreateUserDto {
     @IsNotEmpty()
     password: string;
 
+}
+export class CreateUserResponseDto{
+    @Expose()
+    id: number;
+    @Expose()
+    email: string;
+    @Exclude()
+    password: string;
+    @Expose()
+    created_at: Date;
+    @Expose()
+    updated_at: Date;
+
+
+    constructor(partial: Partial<CreateUserResponseDto>) {
+        Object.assign(this, partial);
+    }
 }
