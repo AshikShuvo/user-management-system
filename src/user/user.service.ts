@@ -35,4 +35,9 @@ export class UserService {
         // return response that must not contain the password
         return new CreateUserResponseDto(newUser);
     }
+
+    async getUserById(id: number) {
+        return this.prismaService.user.findUnique({where: {id}});
+    }
+
 }
